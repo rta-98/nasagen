@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 from pathlib import Path 
 import math
 
-class FitShomate:
+class FitNASA:
     def __init__(
             self, 
             R: float = 1.98720425864083,
@@ -41,23 +41,12 @@ class FitShomate:
         result = {f"a{i}": float(c) for i, c in enumerate(coeff_cut)}
         return result 
 
-""" WIP:
-
-    def Hpoly(Tx, coef):
-        """Integrate Cp quartic""" 
-        a0, a1, a2, a3, a4 = coef  
-        F_x = a1*Tx + 0.5*a2*Tx**2 + (a3/3.0)*Tx**3 + (0.25)*a4*Tx**4 + 0.2*a5*Tx**5 
-        return f"{F_x:,8e}"
-""" 
     def name(self, path: Path) -> str:
         name = path.stem 
         for suffix in ("nasa7", "_2000", "_fullT"):
             if name.endswith(suffix):
                 name = name[: -len(suffix)]
         return name
-
-#    def tocsv(self, path: Path, suffix: str = "_fit.csv") -> str: 
-#        return f"{path.stem}{suffix}"
 
     def fit_one(self, path: Path) -> Dict[str, float]:
         df = self.read(path) # read() imports a path, exports df  
@@ -111,7 +100,7 @@ def main() -> None:
     if not paths: 
         raise SystemExit("No input file provided") 
 
-    fitter = FitShomate(
+    fitter = FitNASA(
         R = args.R,
         T_col = args.T_col,
         Cp_col = args.Cp_col
