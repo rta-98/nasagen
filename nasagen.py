@@ -15,30 +15,40 @@ class FitNASA:
             R_CAL = 1.98720425864083,  # cal/mol-K
             HARTREE_TO_KCAL = 627.5094740631,
             T_col: str = 'T',
+            S_col: str = 'S', 
+            T_cut: int = 200,
+            S_val: int = 4,
             Cp_col: str = 'Cp'): 
         self.R = R 
+        self.S_val = S_val
         self.HRT = HARTREE_TO_KCAL
         self.T_col = T_col 
         self.Cp_col = Cp_col
+        self.S_col = S_col
 
     def read(self, path: Path) -> pd.DataFrame: 
         # Use pandas' Python parsing enginge
         df = pd.read_csv(path, sep=r"\s+", engine="python")
-        out = df[[self.T_col, self.Cp_col]].copy() 
+        out = df[[self.T_col, self.Cp_col, self.S_col]].copy() 
         out[self.T_col] = pd.to_numeric(out[self.T_col], errors="coerce") 
         out[self.Cp_col] = pd.to_numeric(out[self.Cp_col], errors="coerce") 
+        out[self.S_col] = pd.to_numeric(out[self.S_col], errors="coerce")
         out = out.dropna() 
         return out
 
     def fit(self, df:pd.DataFrame) -> Dict[str, float]: 
-        T = df[self.T_col].to_numpy(dtype=float)
-        Cp = df[self.Cp_col].to_numpy(dtype=float)
+        T_arr = df[self.T_col].to_numpy(dtype=float)
+        Cp_arr = df[self.Cp_col].to_numpy(dtype=float)
+        S_arr = df[self.S_col].to_numpy(dtype=float)
         Tb1 = int(200)
-        cut = T >= Tb1 # postulate: cut represents indices 
-        T_cut, Cp_cut = T[cut], Cp[cut]
+        cut = T_arr >= Tb1 # postulate: cut represents indices 
+        T_cut, Cp_cut, S = T_arr[cut], Cp_arr[cut], S_arr[self.S_val]
         A_cut = np.column_stack([np.ones_like(T_cut), T_cut, T_cut**2, T_cut**3, T_cut**4])
         coeff_cut = np.linalg.lstsq(A_cut, Cp_cut, rcond=None)[0]
-        result = {f"a{i}": float(c) for i, c in enumerate(coeff_cut)}
+        result = {
+                **{f"a{i}": float(c) for i, c in enumerate(coeff_cut)},
+                "S": S,
+        }
         return result 
 
     def name(self, path: Path) -> str:
@@ -93,7 +103,9 @@ def main() -> None:
     parser.add_argument("--recursive", action="store_true") 
     parser.add_argument("--T-col", default="T", help="Temperature column label")
     parser.add_argument("--Cp-col", default="Cp", help="Heat Capacity column label") 
+    
     parser.add_argument("--R", type=float, default=1.98720425864083, help="Gas constant for Cp/R")  
+    parser.add_argument("--S-val", type=float, default=4, help='Integer value associated with entropy entry') 
     args = parser.parse_args() 
     paths = collect(args.inputs, args.recursive) # (args.inputs = "file1 file2 .. filen.txt" | args.recursive = positional argument that is required for the collect() function)  
 
@@ -103,8 +115,9 @@ def main() -> None:
     fitter = FitNASA(
         R = args.R,
         T_col = args.T_col,
-        Cp_col = args.Cp_col
-    ) 
+        Cp_col = args.Cp_col,
+        S_val = args.S_val,
+        ) 
     
     results = fitter.fit_all(paths)
     coeffs = [c for c in results.columns if c.startswith("a")] 
