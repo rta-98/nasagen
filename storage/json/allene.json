@@ -1,0 +1,189 @@
+{
+  "schema_version": "1.0",
+  "goodvibes_version": "4.3.0",
+  "generated_at": "2026-08-25T15:57:45+00:00",
+  "options": {
+    "temperature": 298.15,
+    "temperature_interval": "300,2000,100",
+    "conc": null,
+    "QS": "grimme",
+    "QH": false,
+    "freq_cutoff": 100,
+    "S_freq_cutoff": 100.0,
+    "H_freq_cutoff": 100.0,
+    "freq_scale_factor": 1.0,
+    "media": null,
+    "freespace": null,
+    "spc": null,
+    "invert": null,
+    "symm": false,
+    "duplicate": false,
+    "boltz": null,
+    "inertia": "global",
+    "mm_freq_scale_factor": null
+  },
+  "results": [
+    {
+      "file": "/home/yang/projects/nasagen/storage/log/allene.log",
+      "name": "allene",
+      "qcdata": {
+        "file": "allene.log",
+        "program": "Gaussian",
+        "version_program": "Gaussian 16 Revision A.03",
+        "job_type": "GSFreq",
+        "scf_energy": -513.607702602,
+        "charge": 0,
+        "multiplicity": 1,
+        "solvation_model": "gas phase",
+        "empirical_dispersion": "No empirical dispersion detected",
+        "molecular_mass": 111.99361,
+        "symmno": 1,
+        "linear_mol": false,
+        "point_group": "C1",
+        "roconst": [
+          5.79176,
+          1.25511,
+          1.25474
+        ],
+        "rotemp": [
+          0.27796,
+          0.06024,
+          0.06022
+        ],
+        "linear_warning": false,
+        "frequency_wn": [
+          84.1161,
+          84.1724,
+          159.0289,
+          397.2952,
+          560.4866,
+          560.65,
+          589.8042,
+          666.0918,
+          666.1453,
+          747.9967,
+          1061.7571,
+          1263.2585,
+          1263.2688,
+          1602.1944,
+          2149.9084
+        ],
+        "im_frequency_wn": [],
+        "zero_point_corr": 0.02701,
+        "cpu": [
+          0,
+          0,
+          86,
+          0,
+          50300
+        ],
+        "nprocs": 1,
+        "fract_modelsys": [],
+        "has_oniom": false,
+        "atom_nums": [
+          6,
+          6,
+          9,
+          9,
+          6,
+          9,
+          9
+        ],
+        "atom_types": [
+          "C",
+          "C",
+          "F",
+          "F",
+          "C",
+          "F",
+          "F"
+        ],
+        "cartesians": [
+          [
+            -1.290833,
+            0.000202,
+            0.0002
+          ],
+          [
+            -1e-06,
+            6.2e-05,
+            0.000152
+          ],
+          [
+            -2.049094,
+            0.758516,
+            -0.756947
+          ],
+          [
+            -2.049194,
+            -0.758563,
+            0.756791
+          ],
+          [
+            1.290834,
+            -0.000166,
+            0.000177
+          ],
+          [
+            2.049026,
+            -0.757907,
+            -0.757608
+          ],
+          [
+            2.049262,
+            0.75789,
+            0.757411
+          ]
+        ],
+        "applied_freq_scale_factor": 1.0,
+        "sp_energy": null,
+        "sp_version_program": "",
+        "sp_solvation_model": "",
+        "sp_charge": null,
+        "sp_empirical_dispersion": "",
+        "sp_multiplicity": null,
+        "sp_suffix": "",
+        "sp_file": ""
+      },
+      "thermo": {
+        "scf_energy": -513.607702602,
+        "sp_energy": -513.607702602,
+        "zpe": 0.027010349675614463,
+        "zero_point_corr": 0.02701,
+        "enthalpy": -513.5735058551504,
+        "qh_enthalpy": 0.0,
+        "entropy": 0.000130260447722718,
+        "qh_entropy": 0.00012860645311531382,
+        "gibbs_free_energy": -513.612343007639,
+        "qh_gibbs_free_energy": -513.6118498691468,
+        "frequency_wn": [
+          84.1161,
+          84.1724,
+          159.0289,
+          397.2952,
+          560.4866,
+          560.65,
+          589.8042,
+          666.0918,
+          666.1453,
+          747.9967,
+          1061.7571,
+          1263.2585,
+          1263.2688,
+          1602.1944,
+          2149.9084
+        ],
+        "im_frequency_wn": [],
+        "inverted_freqs": [],
+        "point_group": "C1",
+        "symmno": null,
+        "linear_mol": null,
+        "multiplicity": 1,
+        "job_type": "GSFreq",
+        "applied_freq_scale_factor": null
+      },
+      "media_conc": null,
+      "boltzmann_factor": null
+    }
+  ]
+}

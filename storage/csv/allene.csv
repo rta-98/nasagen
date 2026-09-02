@@ -1,0 +1,2 @@
+file,name,scf_energy,sp_energy,zpe,enthalpy,qh_enthalpy,entropy,qh_entropy,gibbs_free_energy,qh_gibbs_free_energy,point_group,symmno,linear_mol,multiplicity,job_type,level_of_theory,program
+allene.log,allene,-513.607702602,-513.607702602,0.027010349675614463,-513.5735058551504,,0.000130260447722718,0.00012860645311531382,-513.612343007639,-513.6118498691468,C1,1,False,1,GSFreq,"wB97XD/6-311+G(2d,2p)",Gaussian
